@@ -192,4 +192,4 @@ If you deploy this publicly, also run it in a container, set stricter resource l
 
 ## License
 
-Released under the MIT License. Add a `LICENSE` file before publishing.
+Released under the MIT License. 
