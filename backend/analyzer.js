@@ -32,7 +32,7 @@ export async function assertPublicUrl(raw) {
 // Stage 1 and 2: render page, capture screenshots, extract data.
 export async function capture(url, id, onStep = () => {}) {
   const candidates = [
-    process.env.PUPPETEER_EXECUTABLE_PATH,
+  
     "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
     "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
     "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
@@ -45,7 +45,10 @@ export async function capture(url, id, onStep = () => {}) {
   for (const p of candidates) {
     if (fs.existsSync(p)) { executablePath = p; break; }
   }
-  const browser = await puppeteer.launch({ headless: "new", args: ["--no-sandbox"], ...(executablePath ? { executablePath } : {}) });
+const browser = await puppeteer.launch({
+  headless: true,
+  args: ["--no-sandbox"]
+});
   try {
     const page = await browser.newPage();
     const reqs = [];

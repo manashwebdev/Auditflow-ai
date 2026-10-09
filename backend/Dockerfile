@@ -1,22 +1,15 @@
 
 FROM ghcr.io/puppeteer/puppeteer:23.11.1
 
-ENV PUPPETEER_SKIP_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome
+WORKDIR /home/pptruser/app
 
-WORKDIR /app
-
-USER root
-
-COPY package*.json ./
+COPY --chown=pptruser:pptruser package*.json ./
 
 RUN npm install --omit=dev
 
-COPY . .
+COPY --chown=pptruser:pptruser . .
 
-RUN mkdir -p shots && chown -R pptruser:pptruser /app
-
-USER pptruser
+RUN mkdir -p shots
 
 EXPOSE 4000
 
